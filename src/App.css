@@ -153,7 +153,7 @@ body {
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: fit-content;
   background-color: black;
   color: #fff;
   text-align: center;

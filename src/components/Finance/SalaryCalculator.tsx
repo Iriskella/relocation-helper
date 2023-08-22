@@ -10,8 +10,8 @@ const calculateIncomeAfterTax = (
   let incomeEUR = currency === "USD" ? income * exchangeRate : income;
 
   // Define tax brackets and rates (as of knowledge cutoff in September 2021)
-  const brackets = [0, 35000, 68507, 171842];
-  const rates = [0.0375, 0.0375, 0.0385, 0.5145];
+  const brackets = [0, 34712, 68508];
+  const rates = [0.097, 0.03735, 0.495];
 
   let tax = 0;
   let remainingIncome = incomeEUR;
@@ -37,13 +37,22 @@ const calculateIncomeAfterTax = (
   return Number(incomeAfterTax.toFixed(2));
 };
 
-const rulingToolTipText = `The salary criteria for the 30% ruling as per January 2023 are as follows:
-The salary amount does not matter if working with scientific research.
-The annual taxable salary for an employee with a master’s degree and who is younger than 30 years, must be more than 31,891 (2022: 30,001).
-The annual taxable salary for other employees must be more than 41,954 (2022: 39,467).`;
+const rulingToolTipText = (
+  <div>
+    The salary criteria for the 30% ruling as per January 2023 are as follows:
+    <br />
+    1. The salary amount does not matter if working with scientific research.
+    <br />
+    2. The annual taxable salary for an employee with a master’s degree and who
+    is younger than 30 years, must be more than 31,891 (2022: 30,001). <br />
+    3. The annual taxable salary for other employees must be more than 41,954
+    (2022: 39,467).
+  </div>
+);
 
 export const SalaryCalculator = () => {
   const [ruling, setRuling] = useState(false);
+  const [isRulingApplicable, setIsRulingApplicable] = useState(false);
   const [annualGrossIncome, setAnnualGrossIncome] = useState(0);
   const [annualNetIncome, setAnnualNetIncome] = useState(0);
   const [monthlyNetIncome, setMonthlyNetIncome] = useState(0);
@@ -53,6 +62,13 @@ export const SalaryCalculator = () => {
     { name: "EUR", icon: "€" },
     { name: "USD", icon: "$" },
   ];
+
+  useEffect(() => {
+    const isRulingApplicable =
+      (currency === "EUR" && annualGrossIncome > 41954) ||
+      (currency === "USD" && annualGrossIncome > 45802);
+    setIsRulingApplicable(isRulingApplicable);
+  }, [annualGrossIncome, currency]);
 
   const handleIncomeChange = (annualGrossIncome: any) => {
     setAnnualGrossIncome(annualGrossIncome);
@@ -79,9 +95,9 @@ export const SalaryCalculator = () => {
           <input
             id="grossIncome"
             name="grossIncome"
-            type="text"
+            type="number"
             placeholder="Annual gross salary"
-            onChange={(e) => handleIncomeChange(Number(e.target.value))}
+            onChange={(e) => handleIncomeChange(e.target.value)}
           ></input>
         </label>
         <label>
@@ -98,14 +114,27 @@ export const SalaryCalculator = () => {
           <span className="tooltiptext">{rulingToolTipText}</span>
         </span>
         <label>
-          With 30% Ruling:{" "}
+          {isRulingApplicable
+            ? "With 30% Ruling: "
+            : "Less then minimum per ruling"}
           <input
             id="rullingCheck"
             name="rullingCheck"
             type="checkbox"
             checked={ruling}
             onChange={() => setRuling(!ruling)}
+            disabled={!isRulingApplicable}
           ></input>
+        </label>
+        <label>
+          A more detailed income tax calculator is{" "}
+          <a
+            href="https://thetax.nl/"
+            rel="dofollow noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
         </label>
       </div>
       <div className="salary-column-container">

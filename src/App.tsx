@@ -7,8 +7,6 @@ import { WeatherForecastComponent } from "./components/Weather";
 
 import { mockTodoData } from "./mockData";
 
-const tabs = ["ToDo", "Important Links", "Housing", "Content"];
-
 export const App = () => {
   return (
     <div className="App">

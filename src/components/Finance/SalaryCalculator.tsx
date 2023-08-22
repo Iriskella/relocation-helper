@@ -9,7 +9,7 @@ const calculateIncomeAfterTax = (
 
   let incomeEUR = currency === "USD" ? income * exchangeRate : income;
 
-  // Define tax brackets and rates (as of knowledge cutoff in September 2021)
+  // Define tax brackets and rates
   const brackets = [0, 34712, 68508];
   const rates = [0.097, 0.03735, 0.495];
 

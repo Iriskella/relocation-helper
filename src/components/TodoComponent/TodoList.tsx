@@ -5,9 +5,13 @@ import { AddTodo } from "./AddTodo";
 import { Todo } from "../../types";
 
 export const TodoList = ({ todosData }: { todosData: Array<Todo> }) => {
-  const data = JSON.parse(
-    localStorage.getItem("todos") ?? JSON.stringify(todosData)
-  );
+  const isStoredTodos =
+    localStorage?.getItem("todos") !== "[]"
+      ? localStorage?.getItem("todos")
+      : false;
+  const data = isStoredTodos
+    ? JSON.parse(localStorage?.getItem("todos") ?? "")
+    : JSON.parse(JSON.stringify(todosData));
   const [todos, setTodos] = useState(data as Array<Todo>);
 
   const handleCompletedChange = (selectedTodo: Todo) => {

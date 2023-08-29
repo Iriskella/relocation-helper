@@ -88,8 +88,9 @@ export const SalaryCalculator = () => {
   }, [ruling, currency, annualGrossIncome]);
 
   return (
-    <div className="salary-row-container">
-      <div className="salary-column-container">
+    <div className="row-container">
+      <div className="column-container">
+        
         <label>
           Enter Annual Gross Income:{" "}
           <input
@@ -137,7 +138,7 @@ export const SalaryCalculator = () => {
           </a>
         </label>
       </div>
-      <div className="salary-column-container">
+      <div className="column-container">
         {isNaN(annualGrossIncome) ? (
           <h2>Enter a valid number</h2>
         ) : (

@@ -7,7 +7,7 @@ interface WeatherForcast {
   icon: string;
 }
 
-const europeCities = [
+export const europeCities = [
   "Amsterdam",
   "Rotterdam",
   "Utrecht",
@@ -30,7 +30,6 @@ export const WeatherForecastComponent = () => {
   >(null);
 
   const [city, setCity] = useState("Amsterdam");
-  //   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const apiKey = "ed6d09a07fc3de424a6e6ccea1879fec";
@@ -107,23 +106,25 @@ export const WeatherForecastComponent = () => {
         ))}
       </select>
       <div id="weather-forecast-data">
-        {weatherForecast?.length ? (
-          <div className="weather-container">
-            {weatherForecast.map((forecast, index) => (
-              <div key={index}>
-                <p>{forecast.date}</p>
-                <p>Avg Temp: {Math.floor(Number(forecast.temperature))}°C</p>
-                <p>Description: {forecast.description}</p>
-                <img
-                  src={`https://openweathermap.org/img/wn/${forecast.icon}@2x.png`}
-                  alt="weather-icon"
-                ></img>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Loading forecast data for {city}</p>
-        )}
+        <div className="border">
+          {weatherForecast?.length ? (
+            <div className="weather-container">
+              {weatherForecast.map((forecast, index) => (
+                <div key={index}>
+                  <p>{forecast.date}</p>
+                  <p>Avg Temp: {Math.floor(Number(forecast.temperature))}°C</p>
+                  <p>Description: {forecast.description}</p>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${forecast.icon}@2x.png`}
+                    alt="weather-icon"
+                  ></img>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Loading forecast data for {city}</p>
+          )}
+        </div>
       </div>
     </div>
   );

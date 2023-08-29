@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import BusinessCard from "./components/Cv/BusinessCard";
 import { ExcelToTable } from "./components/Finance/ExcelToTable";
 import { SalaryCalculator } from "./components/Finance/SalaryCalculator";
 import { TodoList } from "./components/TodoComponent/TodoList";
@@ -33,6 +34,14 @@ export const App = () => {
         <div id="weather-forecast" className="section-container">
           <span className="section-title">Weather Forcast for:</span>
           <WeatherForecastComponent />
+        </div>
+        <div id="business-card" className="section-container">
+          <span className="section-title">My profile</span>
+          <BusinessCard
+            name={"Iris Kella"}
+            phone={"+972546324633"}
+            linkedin={"https://www.linkedin.com/in/iris-kella-341549111/"}
+          />
         </div>
         <div id="excel-to-table" className="section-container">
           <span className="section-title">Excel Diplayer</span>

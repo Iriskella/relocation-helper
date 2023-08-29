@@ -52,16 +52,18 @@ export const TodoList = ({ todosData }: { todosData: Array<Todo> }) => {
   return (
     <div className="todo-list">
       <AddTodo setAddTodo={handleAddToDo} />
-      {todos
-        .sort((item1, item2) => (item1.category >= item2.category ? 1 : -1))
-        .map((item) => (
-          <TodoListItem
-            key={item.id}
-            todo={item}
-            setTodoCompleted={handleCompletedChange}
-            handleDeleteTodo={handleDeleteTodo}
-          ></TodoListItem>
-        ))}
+      <div className="border">
+        {todos
+          .sort((item1, item2) => (item1.category >= item2.category ? 1 : -1))
+          .map((item) => (
+            <TodoListItem
+              key={item.id}
+              todo={item}
+              setTodoCompleted={handleCompletedChange}
+              handleDeleteTodo={handleDeleteTodo}
+            ></TodoListItem>
+          ))}
+      </div>
     </div>
   );
 };

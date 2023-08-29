@@ -42,35 +42,37 @@ export const ExcelToTable = () => {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <div className="drag-drop-area">
-        <p>Drag and drop an Excel file here</p>
-      </div>
-      <button
-        className="action-button"
-        onClick={() => handleClearData()}
-        type="reset"
-      >
-        {" "}
-        Refresh Data
-      </button>
-      <table className="excel-table">
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <th key={index}>{column}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {excelData.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((cell, cellIndex) => (
-                <td key={cellIndex}>{cell}</td>
+      <div className="border">
+        <div className="drag-drop-area">
+          <p>Drag and drop an Excel file here</p>
+        </div>
+        <button
+          className="action-button"
+          onClick={() => handleClearData()}
+          type="reset"
+        >
+          {" "}
+          Refresh Data
+        </button>
+        <table className="excel-table">
+          <thead>
+            <tr>
+              {columns.map((column, index) => (
+                <th key={index}>{column}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {excelData.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
